@@ -29,7 +29,7 @@ Q_tokens_all = set()
 big_dicto = []
 
 # Get words from user
-print("Please type 2 Quechua words: ")
+print("nter 2 Quechua words to see their estimated similarity and synonyms: ")
 input = input().split()
 
 # Crawl dictionary
@@ -104,25 +104,15 @@ def build_data():
 		next_level_Qs.update(E2Q(E_word))
 	print("next level: ", next_level_Qs)
 
-
-	# Find Quechua translation for English meanings and add to another set
-	# for E_word in E_tokens:
-	# 	# Crawl Q2E Dictionary
-	# 	temp_e2q = e2q_url + E_word
-	# 	req = requests.get(temp_e2q, headers)
-	# 	soup = BeautifulSoup(req.content, 'html.parser')
-	# 	print(E_tokens)
-
 build_data()
 
 
 
-# print("Enter 2 Quechua words to see their estimate similarity and synonyms")
 
-# level = 0
-# while level < 3:
-# 	tempq2e_url = "https://glosbe.com/qu/en" + target1
-# 	tempe2q_url = "https://glosbe.com/qu/en" + target1
+# TODO: Loop through all
+# TODO: 2 Words
+# TODO: Crawling errors
+
 
 
 
