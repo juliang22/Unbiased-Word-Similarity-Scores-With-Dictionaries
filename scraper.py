@@ -29,7 +29,7 @@ Q_tokens_all = set()
 big_dicto = []
 
 # Get words from user
-print("nter 2 Quechua words to see their estimated similarity and synonyms: ")
+print("Enter 2 Quechua words to see their estimated similarity and synonyms: ")
 input = input().split()
 
 # Crawl dictionary
@@ -102,11 +102,10 @@ def build_data():
 	next_level_Qs = set()
 	for E_word in E_tokens:
 		next_level_Qs.update(E2Q(E_word))
+	print("Big dicto: ", big_dicto)
 	print("next level: ", next_level_Qs)
 
 build_data()
-
-
 
 
 # TODO: Loop through all
