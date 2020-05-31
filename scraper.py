@@ -25,19 +25,41 @@ e2q_url = "https://glosbe.com/en/qu/"
 E_tokens_all = set()
 Q_tokens_all = set()
 
-# Array of dicts: [{level: 0, E_word: Q_word, ...}, {level: 1, E_word: Q_word, ...}]
-big_dicto = []
+# Quechua words for each level {level: [Q words], ...}
+big_dicto = {}
 
-# Get words from user
+# Get two Quechua words from user
 print("Enter 2 Quechua words to see their estimated similarity and synonyms: ")
 input = input().split()
+if len(input) != 2:
+	print("Please type exactly two inputs.")
+	exit()
+if input[0].lower() == input[1].lower():
+	print("Please type two different Quechua words.")
+	exit()
 
 # Crawl dictionary
 def soupify(url, word):
-	new_url = url + word # TODO: Add 2nd word later in "main" 
+	new_url = url + word 
 	req = requests.get(new_url, headers)
 	soup = BeautifulSoup(req.content, 'html.parser')
+
+	# Website throws an error after too much use
+	too_many_connections = soup.select(".g-recaptcha")
+	if too_many_connections != []:
+		print("Whoops the online dictionary thinks you're a robot. Please navigate to https://glosbe.com/qu/en/ and confirm that you are human to continue.")
+		exit()
 	return soup
+
+# Check if input exists in Quechua dictionary
+def input_exists(input):
+	for word in input:
+		soup = soupify(q2e_url, word)
+		# If input word are not found in Quechua Dictionary
+		does_exist = soup.select(".alert.alert-info")
+		if does_exist != []:
+			print(does_exist[0].get_text())
+			exit()
 
 # Tokenize/filter to nouns
 def tokenize_nouns(text):
@@ -50,8 +72,10 @@ def tokenize_nouns(text):
 	return nouns
 
 # Quechua to English - take Q word, returns set of English nouns from definition 
-def Q2E(word, first=False):
+def Q2E(word, curr_level):
 	# Crawl q2e dict
+	if curr_level == 1:
+		soup = soupify(q2e_url, word)
 	soup = soupify(q2e_url, word)
 
 	# Tokenize definitions
@@ -59,58 +83,71 @@ def Q2E(word, first=False):
 	meanings = soup.select(".meaningContainer.hide-3rd div")
 	meanings.extend(main_meanings)
 
-	# Set level 0 of dicto
-	if first == True:
-		first_E_noun = tokenize_nouns(main_meanings)[0] # Nounify main meaning of inital word
-		# Adding first E:Q item to dictionary
-		dicto_item = {"level": 0, first_E_noun: word} # TODO: Change level: 1 when time comes
-		big_dicto.append(dicto_item)
-
 	# Tokenize/filter to nouns and add each English meanings to a set
 	E_tokens = set()
 	nouns = tokenize_nouns(meanings)
 	for noun in nouns:
-		E_tokens.add(noun)
+		if noun not in E_tokens_all:
+			E_tokens.add(noun)	
 		E_tokens_all.add(noun)
 	return E_tokens
 	
 # English to Quechua - takes English word, builds dicto ({level: _, E:Q, ...}), returns set of Quechua words from definition
-def E2Q(word):
+def E2Q(word, curr_level):
 	# Crawl e2q dict
 	soup = soupify(e2q_url, word)
 
-	Q_set = set()
 	# Tokenize defintions
+	Q_tokens = set()
 	main_meanings = soup.find_all(class_="phr")
 	for Q in main_meanings:
-		Q_set.add(Q.get_text().lower())
-		Q_tokens_all.add(Q.get_text().lower())
-
-	# Adding E:Q item to dictionary
-	dicto_item = {"level": 1, word: Q_set} # TODO: Change level: 1 when time comes
-	big_dicto.append(dicto_item)
-	return Q_set
+		Q = Q.get_text().lower()
+		# If we havent seen this Q word before, add to next bigdicto and use in next layer to find more E words
+		if Q not in Q_tokens_all:
+			Q_tokens.add(Q)
+			big_dicto[str(curr_level)].append(Q)  
+		Q_tokens_all.add(Q)
+	return Q_tokens
 		
 
 # Web crawling & building data data structure
-def build_data(): 
+def build_data(target, levels): 
+	# Build dictionary {level: [Q words], ...}
+	for i in range(levels):
+		big_dicto[str(i)] = []
 
-	E_tokens = Q2E(input[0], first=True)
-	print("E tokens: ", E_tokens)
-	print("Big dicto: ", big_dicto)
+	# Add input word (if it exists) to level 0 
+	Q_tokens_all.add(target)
+	big_dicto["0"] = target	
 
-	next_level_Qs = set()
-	for E_word in E_tokens:
-		next_level_Qs.update(E2Q(E_word))
-	print("Big dicto: ", big_dicto)
-	print("next level: ", next_level_Qs)
+	curr_level = 1 # Level 0 is hardcoded input Q
+	curr_level_Qs = set()
+	next_level_Qs = {target}
+	while levels != curr_level:
+		curr_level_Qs = next_level_Qs
+		next_level_Qs = set()
+		for Q_word in curr_level_Qs:
+			E_tokens = Q2E(Q_word.lower(), curr_level)
+			# print("E tokens: ", E_tokens)
+			# print("Big dicto: ", big_dicto)
 
-build_data()
+			for E_word in E_tokens:
+				next_level_Qs.update(E2Q(E_word.lower(), curr_level))
+				# print("next level: ", next_level_Qs)
 
+		# Printing main structure	
+		if curr_level == 1:
+			print("0: ", big_dicto["0"])	
+		print(str(curr_level) + ": ", sorted(big_dicto[str(curr_level)]))
+		curr_level += 1
 
-# TODO: Loop through all
-# TODO: 2 Words
-# TODO: Crawling errors
+def main():
+	input_exists(input)
+	build_data(input[0], 3)
+	build_data(input[1], 3)
+
+main()
+
 
 
 
