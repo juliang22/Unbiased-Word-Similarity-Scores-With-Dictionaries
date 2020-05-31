@@ -109,7 +109,6 @@ def E2Q(word, curr_level):
 		Q_tokens_all.add(Q)
 	return Q_tokens
 		
-
 # Web crawling & building data data structure
 def build_data(target, levels): 
 	# Build dictionary {level: [Q words], ...}
@@ -143,7 +142,7 @@ def build_data(target, levels):
 
 def main():
 	input_exists(input)
-	build_data(input[0], 3)
+	build_data(input[0], 3) #this is 2 levels deep, dont surpass it or else the dictionary will think we're a bot
 	build_data(input[1], 3)
 
 main()
