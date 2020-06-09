@@ -217,16 +217,16 @@ def main():
 	build_data(input[2], 3, 'c')
 	print(big_dicto)
 
-	scores['algoScore0'] = get_score('b')
-	scores['algoScore1'] = get_score('c')
+	scores['dictionaryAlgoWordPair1Score'] = get_score('b')
+	scores['dictionaryAlgoWordPair2Score'] = get_score('c')
 
-	scores['word2VecScore0'] = check_word2vec_similarities(input[0], input[1])
-	scores['word2VecScore1'] = check_word2vec_similarities(input[0], input[2])
+	scores['word2VecWordPair1Score'] = check_word2vec_similarities(input[0], input[1])
+	scores['word2VecWordPair2Score'] = check_word2vec_similarities(input[0], input[2])
 
 	print(scores)
 
 	print('percent change in similarity scores between first word pair (' + input[0] + ', ' + input[1] + ') and second word pair (' + input[0] + ', ' + input[2] + ')')
-	print('for dictionary algorithm: ' + get_pch(scores['algoScore0'], scores['algoScore1']))
-	print('for word2vec algorithm: ' + get_pch(scores['word2VecScore0'], scores['word2VecScore1']))
+	print('for dictionary algorithm: ' + get_pch(scores['dictionaryAlgoWordPair1Score'], scores['dictionaryAlgoWordPair2Score']))
+	print('for word2vec algorithm: ' + get_pch(scores['word2VecWordPair1Score'], scores['word2VecWordPair2Score']))
 
 main()
