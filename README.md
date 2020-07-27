@@ -1,7 +1,7 @@
 # Unbiased-Word-Similarity-Scores-With-Dictionaries
 Final Project for Computational Linguistics, Dartmouth College 20S
 
-->
+
 **Unbiased Word-Similarity Algorithm**
 *****
 
@@ -9,6 +9,7 @@ Julian Grunauer (Julian.A.Grunauer.21@Dartmouth.edu)
 Faustino Cortina (Faustino.Cortina.21@Dartmouth.edu)
 Dartmouth College - Computational Linguistics
 
+->
 **ABSTRACT.** Word-Similarity algorithms are used to determine word meanings through comparison and are used both in research settings (psychology, cognitive science, linguistics, etc...) and in practical affairs (law, consumer-analysis, technology, etc…). Despite their widespread use, the results of these algorithms are often biased by their data-source and require vast data-sets to train the similarity models. Thus, our idea for this project was two-fold: (1) create an algorithm that is comparable to word2vec’s  similarity scores, but without the bias that word2vec often displays and (2) find a way to mine data that isn't dependent on large swaths of transcribed text so that our algorithm could be implemented for low-resource languages. At the onset of this project, we viewed dictionaries as the perfect data source because of their existence within low-resource languages and we viewed dictionaries as an unbiased source of semantic information. Our hypothesis did not prove true and our results were mixed. Our algorithm often performed better than word2vec for words that are intuitively similar and sometimes managed to remove some contextually biased word-pairings. However, in the course of this project we realized that dictionaries themselves are often biased and these biases carried over into our results. Thus, in many instances, biases in word2vec were also found in our algorithm.
 <-
 
