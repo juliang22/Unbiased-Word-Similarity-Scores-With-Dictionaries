@@ -56,9 +56,10 @@ The only ethical consideration with our algorithm is that it is scraping informa
 
 
 <br>
-**References**<br>
-The Quechua-English dictionary we used was <https://glosbe.com/en/qu> <br>
-The pretrained word2vec model was taken from <https://github.com/facebookresearch/fastText/>
+**References**
+<br>
+The Quechua-English dictionary we used was from: [Q2E Dict](https://glosbe.com/en/qu) <br>
+The pretrained word2vec model was taken from: [Word2Vec](https://github.com/facebookresearch/fastText/) 
 
 
 
