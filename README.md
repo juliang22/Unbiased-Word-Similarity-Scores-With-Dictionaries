@@ -32,9 +32,9 @@ We decided to focus on gender biases for a couple of the rows in Table 1 to furt
 We used the (sacred, flower) vs (sacred, mountain) word pair comparison to explore context-based biases that are specific to the Quechua language. In many Andean religions, mountains were considered to be very sacred, and it was very common for offerings to be made to some of the largest, most sacred mountains. As a result, it is possible for (sacred, mountain) to have an unusually high similarity score in word2vec as a result of context-based associations between mountain and sacred that may not be as prevalent in dictionary definitions. Our results precisely showed this, with (sacred, mountain) being considered twice as similar to (sacred, flower) in word2vec. Our algorithm also found (sacred, mountain) to be more similar, but it had a much less extreme increase in similarity than word2vec (39% vs. 138%), implying that our algorithm may have reduced some contextual biases in this example.
 
 
-![table 1](results/table1)
+![table 1](../results/table1)
 
-![table 2](results/table2)
+![table 2](../results/table2)
 
 
 
