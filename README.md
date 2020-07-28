@@ -1,9 +1,9 @@
 # Unbiased-Word-Similarity-Scores-With-Dictionaries
 Final Project for Computational Linguistics, Dartmouth College 20S
 
-<p align="center">
+
 **Unbiased Word-Similarity Algorithm**
-</p>
+
 *****
 
 Julian Grunauer (Julian.A.Grunauer.21@Dartmouth.edu)
