@@ -1,8 +1,8 @@
-</p align="center"># Unbiased-Word-Similarity-Scores-With-Dictionaries</p>
+# Unbiased-Word-Similarity-Scores-With-Dictionaries
 Final Project for Computational Linguistics, Dartmouth College 20S
 
 
-**Unbiased Word-Similarity Algorithm**
+</p align="center">Unbiased Word-Similarity Algorithm</p>
 
 *****
 
