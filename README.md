@@ -32,6 +32,9 @@ We decided to focus on gender biases for a couple of the rows in Table 1 to furt
 We used the (sacred, flower) vs (sacred, mountain) word pair comparison to explore context-based biases that are specific to the Quechua language. In many Andean religions, mountains were considered to be very sacred, and it was very common for offerings to be made to some of the largest, most sacred mountains. As a result, it is possible for (sacred, mountain) to have an unusually high similarity score in word2vec as a result of context-based associations between mountain and sacred that may not be as prevalent in dictionary definitions. Our results precisely showed this, with (sacred, mountain) being considered twice as similar to (sacred, flower) in word2vec. Our algorithm also found (sacred, mountain) to be more similar, but it had a much less extreme increase in similarity than word2vec (39% vs. 138%), implying that our algorithm may have reduced some contextual biases in this example.
 
 
+![table 1](results/table1)
+
+![table 2](results/table2)
 
 
 
@@ -44,7 +47,7 @@ One interesting thought for why our Quechua-English dictionary was so biased is 
 While our algorithm still has some biases, it is still a fairly accurate word similarity algorithm that does not require any machine learning on corpuses of data. This would make our algorithm very beneficial to any low-resource language that does not have enough written data to train context-based word similarity algorithms. Our algorithm will also contribute to the computational linguistics field by providing linguists with an baseline dictionary-based algorithm that can be used as a model for creating even better dictionary-based algorithms in the future.
 The only ethical consideration with our algorithm is that it is scraping information from a Quechua-English dictionary that has safeguards to prevent excessive web scraping from computers. While our intents are not malicious (like cloning their dictionary for monetary gain), we are still attempting to make a large quantity of programmatic requests on a dictionary that does not like that.
 
-Conclusion
+**Conclusion**
 To sum up, we succeeded in creating a lightweight word similarity algorithm that does not require machine learning or any data outside of a dictionary, and we did this in a fairly low resource language, Quechua. While our algorithm was moderately successful in finding similarities between words relative to word2vec, it struggles to remove context-based biases from word2vec, and actually contributed sizable biases from dictionary definitions.
 In the future, our algorithm can be applied to other dictionaries in other languages. Theoretically, it is possible to use our algorithm in any language that has an online dictionary, however, our results have shown us that it is very important to ensure that the dictionary we choose is not too biased in its definitions. It is likely that lower-resource language dictionaries are more likely to exhibit biases, as curators of these dictionaries are more likely to have less time and resources at their disposal to thoroughly revise these dictionaries.
 Another potentially interesting application of our algorithm is to try it on a higher-resource language and see whether its effectiveness increases as a result of a potentially more unbiased dictionary. It is possible that higher-resource languages, like English, with more meticulously curated online dictionaries may do a better job reducing biases than our Quechua-English dictionary did. 
