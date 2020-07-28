@@ -1,4 +1,4 @@
-# Unbiased-Word-Similarity-Scores-With-Dictionaries
+</p align="center"># Unbiased-Word-Similarity-Scores-With-Dictionaries</p>
 Final Project for Computational Linguistics, Dartmouth College 20S
 
 
